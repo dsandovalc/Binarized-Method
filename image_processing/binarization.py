@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-def percent_binarization(image,percent_val,out_path):
+def percent_binarization(image,percent_val,save_path):
     img = cv2.imread(image)
     hist, bins = np.histogram(img.ravel(), 256, [0, 256])
 
@@ -20,5 +20,7 @@ def percent_binarization(image,percent_val,out_path):
         if bars_sum >= percent:
             break
         i += 1
+    
     _, binarized = cv2.threshold(img, i, 256, cv2.THRESH_BINARY)
-    return cv2.imwrite(out_path, binarized), print(out_path,i)
+    
+    return cv2.imwrite(save_path, binarized), print(save_path,i)
