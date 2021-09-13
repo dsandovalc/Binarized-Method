@@ -8,7 +8,7 @@ superpixels_images = stack((segmentation_images))
 
 for i, img in enumerate(segmentation_images):
     s = img.split('/')
-    binarization.percent_binarization(img,0.5,'db/output/segmentation_cropped/binary_cropped/50_{}'.format(s[-1]))
+    binarization.percent_binarization(img,0.4,'db/output/segmentation_cropped/binary_cropped/40_{}'.format(s[-1]))
     binarization.percent_binarization(img,0.8,'db/output/segmentation_cropped/binary_cropped/80_{}'.format(s[-1]))
     
     img = cv2.imread(img,0)

@@ -41,18 +41,20 @@ def remove_mask(path_of_images_with_mask, save_path):
         cropped.save('{}mask_remove_{}'.format(save_path,s[-1]))
     return
 
-def plot_cropped_img_in_full_img(full_blur_image,cropped_img_binarized_path):
+def plot_cropped_img_in_full_img(full_blur_image,cropped_img_binarized_path,second_img_binarized_path):
 
     x, y = 0, 0
     
     for n, binarized_cropped in enumerate(sorted(cropped_img_binarized_path)):
         img_cropped = cv2.imread(binarized_cropped)
+        if n > 3:
+            img_cropped = cv2.imread('{}/80_mask_remove_segmentation_mask_{}.png'.format(second_img_binarized_path,n+1))
         
         print('{} --> {}: ({},{})'.format(binarized_cropped, n+1, img_cropped.shape[0]*x, img_cropped.shape[1]*(y%2)))
         
         for i in range(img_cropped.shape[0]):
             for j in range(img_cropped.shape[1]):
-                full_blur_image[(i + ((img_cropped.shape[0]+2) * x)), (j + ((img_cropped.shape[1]-1) * (y%2)))] = img_cropped[i,j]
+                full_blur_image[(i + ((img_cropped.shape[0]) * x)), (j + ((img_cropped.shape[1]) * (y%2)))] = img_cropped[i,j]
         
         plt.imshow(full_blur_image)
         plt.show()
