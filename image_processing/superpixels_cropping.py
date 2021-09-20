@@ -41,7 +41,7 @@ def remove_mask(path_of_images_with_mask, save_path):
         cropped.save('{}mask_remove_{}'.format(save_path,s[-1]))
     return
 
-def plot_cropped_img_in_full_img(full_blur_image,cropped_img_binarized_path,second_img_binarized_path):
+def stack_plot_cropped_img_in_full_img(full_blur_image,cropped_img_binarized_path,second_img_binarized_path):
 
     x, y = 0, 0
     
@@ -52,6 +52,23 @@ def plot_cropped_img_in_full_img(full_blur_image,cropped_img_binarized_path,seco
         
         print('{} --> {}: ({},{})'.format(binarized_cropped, n+1, img_cropped.shape[0]*x, img_cropped.shape[1]*(y%2)))
         
+        for i in range(img_cropped.shape[0]):
+            for j in range(img_cropped.shape[1]):
+                full_blur_image[(i + ((img_cropped.shape[0]) * x)), (j + ((img_cropped.shape[1]) * (y%2)))] = img_cropped[i,j]
+        
+        plt.imshow(full_blur_image)
+        plt.show()
+        
+        x = x + y%2
+        y = y + 1
+        
+    return print('Finished!')
+
+def plot_cropped_img_in_full_img(full_blur_image, img_cropped, number_of_images):
+    
+    x, y = 0, 0
+    
+    for n in range(0,number_of_images):
         for i in range(img_cropped.shape[0]):
             for j in range(img_cropped.shape[1]):
                 full_blur_image[(i + ((img_cropped.shape[0]) * x)), (j + ((img_cropped.shape[1]) * (y%2)))] = img_cropped[i,j]

@@ -1,9 +1,9 @@
+from matplotlib import pyplot as plt
 import numpy as np
 import cv2
 
-def percent_binarization(image,percent_val,save_path):
-    img = cv2.imread(image)
-    hist, bins = np.histogram(img.ravel(), 256, [0, 256])
+def percent_binarization(image,percent_val):
+    hist, bins = np.histogram(image.ravel(), 256, [0, 256])
 
     if percent_val > 100:
         print('(Warning: The percentage (%) value must be <= 100)')
@@ -21,6 +21,6 @@ def percent_binarization(image,percent_val,save_path):
             break
         i += 1
     
-    _, binarized = cv2.threshold(img, i, 256, cv2.THRESH_BINARY)
+    _, binarized = cv2.threshold(image, i, 256, cv2.THRESH_BINARY)
     
-    return cv2.imwrite(save_path, binarized), print(save_path,i)
+    return i, percent_val, binarized
