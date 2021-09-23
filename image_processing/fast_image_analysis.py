@@ -5,7 +5,7 @@ def analize_image(img_path,path_to_save_stretch,path_to_save_blur):
     image = cv2.imread(img_path)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     stretch = regular_stretching(gray)
-    blur = cv2.medianBlur(stretch, 15)
+    blur = cv2.medianBlur(stretch, 9)
     cv2.imwrite(path_to_save_stretch, stretch)
     cv2.imwrite(path_to_save_blur, blur)
 
