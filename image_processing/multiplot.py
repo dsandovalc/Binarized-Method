@@ -12,7 +12,7 @@ def multiplot_from_path(rows, cols, images_path, plot_title, save_path, save_fig
         plt.axis('off')
     return plt.savefig('{}/Figure_{}.png'.format(save_path,save_figure_name))
 
-def multiplot_from_array(rows, cols, images_list, plot_titles_list, grid_color_list, x_ticks, x_labels, y_ticks, y_labels):
+def multiplot_from_array(rows, cols, images_list, plot_titles_list, graph_titles_list, grid_color_list, x_ticks, x_labels, y_ticks, y_labels):
     i=0
     for i, img in enumerate(images_list):
         plt.subplot(rows, cols, i+1)
@@ -26,6 +26,7 @@ def multiplot_from_array(rows, cols, images_list, plot_titles_list, grid_color_l
     n=0
     for n, graph in enumerate(images_list):
         plt.subplot(rows, cols, i+n+1)
+        plt.title(graph_titles_list[n])
         # plt.hist(graph.ravel(), 256, [0,256], histtype='bar', color=grid_color_list[n])
         histplot(graph.ravel(), kde=True, color=grid_color_list[n])
         # hist = cv2.calcHist([graph], [0], None, [256], [0,256])
