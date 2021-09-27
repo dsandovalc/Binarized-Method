@@ -1,3 +1,3 @@
-from image_processing import superpixels_cropping
+from .superpixels_cropping import remove_mask
 
-superpixels_cropping.remove_mask('db/output/segmentation_cropped/img_with_mask/*.png','db/output/segmentation_cropped/img_without_mask/')
+remove_mask('db/output/segmentation_cropped/img_with_mask/*.png','db/output/segmentation_cropped/img_without_mask/')
